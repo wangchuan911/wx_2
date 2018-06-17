@@ -1,12 +1,7 @@
 server:
   port: 443
-  ssl:
-    key-store: classpath:keystore.p12
-    key-store-password: jxaa114805
-    keyStoreType: PKCS12
-    keyAlias: tomcat
 spring:
   profiles:
-    active: wechat
+    active: [wechat,atomSrv]
 
 
