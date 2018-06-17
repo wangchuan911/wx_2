@@ -1,0 +1,17 @@
+wechat:
+  prop:
+    appID: wx675824e3f240da6d
+    appsecret: b2f4490e7f14bf60edc3bbe854ce70c1
+    token: 9dvL9Kze96Oc76XhMUeI03LTZ29
+    key: AC32OLzYAjjkPqzxilsPiMPbqYCHESnOuPzyYpjFyVw
+    before_fresh_min: 110
+  url:
+    sendToUser: https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={token}
+    getToken: https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={appid}&secret={secret}
+    getIPs: https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={token}
+  schedul:
+    power: on
+    delay: 300000
+tstdtz:
+  url:
+    tdtz: http://www.tstdtz.com/tags/{location}停电通知
