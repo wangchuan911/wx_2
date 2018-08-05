@@ -29,8 +29,7 @@ import java.util.Map;
 
 @Configuration
 public class WeChatConfiguration {
-    @Value("${wechat.schedul.power}")
-    private boolean schedulOn;
+
     @Autowired
     MsgEncryptFilter msgEncryptFilter;
 
@@ -44,7 +43,7 @@ public class WeChatConfiguration {
     @Scheduled(initialDelay = 0, fixedDelayString = "${wechat.schedul.delay}")
     // cron = "0 0/5 * * * ? "
     // "1/5 * * * * ?"
-    public void schedulSyncToken() {
+    public void schedulSyncToken(@Value("${wechat.schedul.power}") boolean schedulOn) {
         if(schedulOn)
             this.freshToken(0);
     }
@@ -77,14 +76,18 @@ public class WeChatConfiguration {
 
 
 
-    private Token accessToken;
+    private Token accessToken=new Token();;
+    @Bean
+    public Token getToken(){
+        return accessToken;
+    }
 
     @Autowired
     private RestTemplate restTemplate;
 
-    private Map<String, String> map;
 
     private void freshToken(int early) {
+        Map<String, String> map=null;
         if (map == null) {
             map = new HashMap<String, String>(4);
             map.put("appid", this.appID);
@@ -96,9 +99,9 @@ public class WeChatConfiguration {
                 - (Calendar.getInstance().getTimeInMillis()) > (early * 1000 * 60))) {
             return;
         }
-        this.accessToken = restTemplate.getForObject(getToken_url, Token.class,
-                map);
-        map.put("token", accessToken.getAccess_token());
+        accessToken.setToken(restTemplate.getForObject(getToken_url, Token.class,
+                map));
+        System.out.println("new token:"+accessToken);
     }
 
     public void freshToken() {

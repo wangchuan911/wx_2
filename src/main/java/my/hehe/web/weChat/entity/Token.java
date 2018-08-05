@@ -11,6 +11,12 @@ public class Token {
         return access_token;
     }
 
+    public void setToken(Token tk){
+        if(tk==null)return;
+        setAccess_token(tk.access_token);
+        setExpires_in(expires_in);
+    }
+
     public void setAccess_token(String access_token) {
         this.access_token = access_token;
     }
