@@ -1,0 +1,1 @@
+nohup java -jar -Dspring.profiles.active=default,wechat,atomSrv,ssh web-0.0.1-SNAPSHOT.jar >> ./output.log 2>&1 & tail -f ./output.log
