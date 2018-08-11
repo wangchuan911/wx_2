@@ -11,6 +11,7 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -26,24 +27,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 @EnableScheduling
-
 @Configuration
+@Profile("wechat")
 public class WeChatConfiguration {
+    @Value("${wechat.schedul.power}") boolean schedulOn;
 
     @Autowired
     MsgEncryptFilter msgEncryptFilter;
 
     @Autowired
     WeChatService weChatService;
-    @Bean
-    public RestTemplate getRestTemplate(){
-        return new RestTemplate();
-    }
 
     @Scheduled(initialDelay = 0, fixedDelayString = "${wechat.schedul.delay}")
     // cron = "0 0/5 * * * ? "
     // "1/5 * * * * ?"
-    public void schedulSyncToken(@Value("${wechat.schedul.power}") boolean schedulOn) {
+    public void schedulSyncToken() {
         if(schedulOn)
             this.freshToken(0);
     }

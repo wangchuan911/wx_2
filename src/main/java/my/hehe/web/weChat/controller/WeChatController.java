@@ -5,11 +5,13 @@ import my.hehe.web.weChat.entity.encrypt.WXBizMsgCrypt;
 import my.hehe.web.weChat.entity.msg.request.MsgBody;
 import my.hehe.web.weChat.services.WeChatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Profile("wechat")
 public class WeChatController {
     @Autowired
     private WeChatService weChatService;

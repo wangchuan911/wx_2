@@ -8,6 +8,7 @@ import my.hehe.web.weChat.entity.encrypt.WXBizMsgCrypt;
 import my.hehe.web.weChat.entity.msg.response.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service("weChatService")
+@Profile("wechat")
 public class WeChatService {
 
     @Autowired

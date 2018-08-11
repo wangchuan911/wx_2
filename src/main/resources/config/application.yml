@@ -2,6 +2,6 @@ server:
   port: 443
 spring:
   profiles:
-    active: [wechat,atomSrv]
+    active: [wechat,atomSrv,ssh]
 
 
